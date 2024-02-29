@@ -1,0 +1,54 @@
+/* reset */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img{
+    max-width: 100%;
+}
+
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+  
+}
+
+
+
+
+/* utlis */
+
+.container{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+}
+
+/* debug */
+
+.debug{
+    min-height: 80px;
+    background-color: rgb(216, 163, 98);
+    padding: 2rem;
+}
+
+
+.task{
+   
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+
+.task i{
+    cursor: pointer;
+}
+
+.line-through{
+    text-decoration: line-through;
+}

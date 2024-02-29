@@ -7,28 +7,7 @@ const app = createApp({
     return {
       title: "Todo App",
 
-      tasks: [
-        {
-          name: "Task 1",
-          state: true,
-        },
-        {
-          name: "Task 2",
-          state: false,
-        },
-        {
-          name: "Task 3",
-          state: true,
-        },
-        {
-          name: "Task 4",
-          state: false,
-        },
-        {
-          name: "Task 5",
-          state: true,
-        },
-      ],
+      tasks: [],
 
       newTask: {
         name: "",
@@ -57,6 +36,18 @@ const app = createApp({
     //     this.tasks[index].state = false;
     //   }
     // },
+
+    fetchTaskList() {
+      axios
+        .get("http://localhost/php-todo-list-json/backend/api/get-list.php")
+        .then((response) => {
+          console.log(response.data);
+          this.todolist = response.data;
+        });
+    },
+  },
+  mounted() {
+    this.fetchTaskList();
   },
 });
 

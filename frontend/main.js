@@ -20,12 +20,6 @@ const app = createApp({
     // deleteTasks(index) {
     //   this.tasks.splice(index, 1);
     // },
-    // AddTasck() {
-    //   const nuovaTask = { ...this.newTask };
-    //   if (!nuovaTask.name) {
-    //     alert("non hai inserito");
-    //     return;
-    //   }
     //   this.tasks.push(nuovaTask);
     //   this.newTask.name = "";
     // },
@@ -42,8 +36,42 @@ const app = createApp({
         .get("http://localhost/php-todo-list-json/backend/api/get-list.php")
         .then((response) => {
           console.log(response.data);
-          this.todolist = response.data;
+          this.tasks = response.data;
         });
+    },
+    AddTasck() {
+      const nuovaTask = this.newTask;
+      console.log(nuovaTask);
+
+      // this.newTask.name = "";
+
+      const data = {
+        params: { nuovaTask },
+      };
+
+      const params = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      axios
+        .post(
+          "http://localhost/php-todo-list-json/backend/api/tasks-list.php",
+          data,
+          params
+        )
+        .then((response) => {
+          console.log(response.data);
+        });
+
+      // if (!nuovaTask.name) {
+      //   alert("non hai inserito");
+      //   return;
+      // }
+      // this.tasks.push(nuovaTask);
+
+      this.newTask.name = "";
     },
   },
   mounted() {

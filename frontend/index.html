@@ -29,8 +29,15 @@
         <h2>Nuova Task</h2>
 
         <label for=""></label>
-        <input type="text " class="form-control" />
-        <button class="btn btn-primary my-4">Aggiungi</button>
+        <input
+          @keyUp.enter="AddTasck()"
+          type="text "
+          class="form-control"
+          v-model="newTask.name"
+        />
+        <button @click="AddTasck()" class="btn btn-primary my-4">
+          Aggiungi
+        </button>
 
         <div class="row">
           <div class="col-6">

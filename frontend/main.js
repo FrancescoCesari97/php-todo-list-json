@@ -17,20 +17,6 @@ const app = createApp({
   },
 
   methods: {
-    // deleteTasks(index) {
-    //   this.tasks.splice(index, 1);
-    // },
-    //   this.tasks.push(nuovaTask);
-    //   this.newTask.name = "";
-    // },
-    // changeState(index) {
-    //   if (this.tasks[index].state == false) {
-    //     this.tasks[index].state = true;
-    //   } else if (this.tasks[index].state == true) {
-    //     this.tasks[index].state = false;
-    //   }
-    // },
-
     //* metodo che recupera le tasks dalla api
     fetchTaskList() {
       axios.get("../backend/api/get-list.php").then((response) => {
@@ -41,35 +27,25 @@ const app = createApp({
 
     //* metodo che invia una nuova task alla api e ne riceve la lista aggiornata
     AddTasck() {
-      // const nuovaTask = this.newTask;
-      // console.log(nuovaTask);
-
-      // this.newTask.name = "";
-
+      //* i dati da postare
       const data = {
         name: this.newTask.name,
         state: false,
       };
 
+      //* i parametri da aggiungere alla richiesta (headers e altro)
       const params = {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       };
 
+      //* la richiesta axios per aggiungere una task
       axios
         .post("../backend/api/add-task-list.php", data, params)
         .then((response) => {
-          console.log(response.data);
+          this.tasks = response.data;
         });
-
-      // if (!nuovaTask.name) {
-      //   alert("non hai inserito");
-      //   return;
-      // }
-      // this.tasks.push(nuovaTask);
-
-      this.newTask.name = "";
     },
   },
   mounted() {

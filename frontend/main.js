@@ -31,22 +31,24 @@ const app = createApp({
     //   }
     // },
 
+    //* metodo che recupera le tasks dalla api
     fetchTaskList() {
-      axios
-        .get("http://localhost/php-todo-list-json/backend/api/get-list.php")
-        .then((response) => {
-          console.log(response.data);
-          this.tasks = response.data;
-        });
+      axios.get("../backend/api/get-list.php").then((response) => {
+        console.log(response.data);
+        this.tasks = response.data;
+      });
     },
+
+    //* metodo che invia una nuova task alla api e ne riceve la lista aggiornata
     AddTasck() {
-      const nuovaTask = this.newTask;
-      console.log(nuovaTask);
+      // const nuovaTask = this.newTask;
+      // console.log(nuovaTask);
 
       // this.newTask.name = "";
 
       const data = {
-        params: { nuovaTask },
+        name: this.newTask.name,
+        state: false,
       };
 
       const params = {
@@ -56,11 +58,7 @@ const app = createApp({
       };
 
       axios
-        .post(
-          "http://localhost/php-todo-list-json/backend/api/tasks-list.php",
-          data,
-          params
-        )
+        .post("../backend/api/add-task-list.php", data, params)
         .then((response) => {
           console.log(response.data);
         });
@@ -75,6 +73,7 @@ const app = createApp({
     },
   },
   mounted() {
+    //* prendi la lista dalla api e visualizzala
     this.fetchTaskList();
   },
 });

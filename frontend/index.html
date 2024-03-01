@@ -45,6 +45,7 @@
             <ul class="p-0">
               <li
                 v-for="(task, index) in tasks"
+                @click="ChangeState(index, task)"
                 v-show="!task.state"
                 :class="task.state ? 'text-decoration-line-through' : '' "
                 class="task rounded my-3"
@@ -61,6 +62,7 @@
             <ul class="p-0">
               <li
                 v-for="(task, index) in tasks"
+                @click="ChangeState(index, task)"
                 v-show="task.state"
                 :class="task.state ? 'text-decoration-line-through' : '' "
                 class="task rounded my-3"

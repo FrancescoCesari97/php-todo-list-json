@@ -47,6 +47,34 @@ const app = createApp({
           this.tasks = response.data;
         });
     },
+
+    //* metodo che modifica lo stato di una nuova task
+    ChangeState(index, task) {
+      console.log(index, task);
+
+      //* cambio lo stato da true a false o viceversa
+      const newState = !task.state;
+
+      //* i dati da postare aggiornati
+      const data = {
+        name: task.name,
+        state: newState,
+      };
+
+      //* i parametri da aggiungere alla richiesta (headers e altro)
+      const params = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      //* la richiesta axios per aggiungere una task
+      axios
+        .post("../backend/api/update-task.php", data, params)
+        .then((response) => {
+          this.tasks = response.data;
+        });
+    },
   },
   mounted() {
     //* prendi la lista dalla api e visualizzala

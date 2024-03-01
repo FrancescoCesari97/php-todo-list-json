@@ -57,6 +57,7 @@ const app = createApp({
 
       //* i dati da postare aggiornati
       const data = {
+        index,
         name: task.name,
         state: newState,
       };
@@ -68,7 +69,7 @@ const app = createApp({
         },
       };
 
-      //* la richiesta axios per aggiungere una task
+      //* la richiesta axios per cambiare lo stato della task
       axios
         .post("../backend/api/update-task.php", data, params)
         .then((response) => {

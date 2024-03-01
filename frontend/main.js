@@ -46,11 +46,13 @@ const app = createApp({
         .then((response) => {
           this.tasks = response.data;
         });
+
+      this.newTask.name = "";
     },
 
     //* metodo che modifica lo stato di una nuova task
     ChangeState(index, task) {
-      console.log(index, task);
+      // console.log(index, task);
 
       //* cambio lo stato da true a false o viceversa
       const newState = !task.state;
@@ -72,6 +74,30 @@ const app = createApp({
       //* la richiesta axios per cambiare lo stato della task
       axios
         .post("../backend/api/update-task.php", data, params)
+        .then((response) => {
+          this.tasks = response.data;
+        });
+    },
+
+    //* metodo che modifica lo stato di una nuova task
+    DelateTask(index) {
+      console.log(index);
+
+      //* i dati da postare aggiornati
+      const data = {
+        index,
+      };
+
+      //* i parametri da aggiungere alla richiesta (headers e altro)
+      const params = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      //* la richiesta axios per cambiare lo stato della task
+      axios
+        .post("../backend/api/delete-task.php", data, params)
         .then((response) => {
           this.tasks = response.data;
         });
